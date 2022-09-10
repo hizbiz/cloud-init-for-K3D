@@ -59,3 +59,7 @@ Now you should be able to see the newly created cluster with:
 ```bash
 kubectl cluster-info
 ```
+or:
+```bash
+k3d cluster ls
+```
