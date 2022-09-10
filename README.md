@@ -2,7 +2,7 @@
 
 This is a sample repository that shows a step to step guide on how to setup a [K3D](https://k3d.io) [Kubernetes](https://kubernetes.io/) cluster environment on [Ubuntu](https://ubuntu.com/). We will create a [K3D](https://k3d.io) [kubernetes](https://kubernetes.io/) cluster, install [KEDA](https://keda.sh/) and [RabbitMQ](https://www.rabbitmq.com/) in it, then create a sample Python application with pika to publish jobs to the RabbitMQ queue and consume messages from it (to simulate worker that does the job). Addionally a [helm charts](https://helm.sh/) to install this sample application into the cluster will be demonstrated as well.
 
-## Environment setup
+## 1. Environment setup
 ### Startpoint
 Assuming we have an [Ubuntu](https://ubuntu.com/) 20.04+ environment as starting point.
 
@@ -47,4 +47,12 @@ k3d completion bash | sudo tee /etc/bash_completion.d/k3d
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
+```
+
+## 2. Create cluster
+```bash
+# use 'k3d cluster create -h' to see help on how to create cluster
+# here we create one cluster named 'dev' and map the host port 8080 to the default load balancer in the created cluster
+k3d cluster create dev -p 0.0.0.0:8080:80@loadbalancer
+```
 ```
