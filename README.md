@@ -55,4 +55,7 @@ helm repo update
 # here we create one cluster named 'dev' and map the host port 8080 to the default load balancer in the created cluster
 k3d cluster create dev -p 0.0.0.0:8080:80@loadbalancer
 ```
+Now you should be able to see the newly created cluster with:
+```bash
+kubectl cluster-info
 ```
