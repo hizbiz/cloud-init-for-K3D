@@ -12,4 +12,4 @@ Using this sample application, I will demonstrate:
 ## Setup K3D kubernetes develop/test environment
 Refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully) to setup the environment manually if you have a working Ubuntu 20.04 environemnt.
 
-Or, preferable, you can install multipass and use the cloud-init.yaml in this repostiory to create one Ubuntu VM with everything configured in a couple of minutes. 
+Or, preferable, you can install multipass and use the cloud-init.yaml in this repostiory to create one Ubuntu VM with everything configured in a couple of minutes all automatically. 
