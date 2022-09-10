@@ -76,13 +76,13 @@ kubectl apply -f expose-rabbit.yaml
 The above command will direct any traffic to HTTP Port (80) on the host VM to the RabbitMQ Management Service running inside the cluster. For example, you can access RabbitMQ in the cluster from the host machine where you run multipass to create the Ubuntu VM.
 
 1. identify multipass Ubuntu VM's IP address
-- From host machine where you install multipass
-```bash
-multipass ls
-```
-- From within the Ubuntu VM
-```bash
-ip address
-```
+  - From host machine where you install multipass
+  ```bash
+  multipass ls
+  ```
+  - From within the Ubuntu VM
+  ```bash
+  ip address
+  ```
 2. access RabbitMQ from web browser
 open your favorate web browser and access: http://172.23.59.52/, (assuming 172.23.59.52 is the IP address of your multipass Ubuntu VM), you will see RabbitMQ Manaement web page.
