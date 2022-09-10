@@ -32,3 +32,4 @@ multipass shell test
 ```
 
 5. play with the newly created environment.
+Refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully#6-verify-the-environment) on how to verify the newly created VM.
