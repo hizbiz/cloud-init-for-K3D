@@ -85,4 +85,4 @@ The above command will direct any traffic to HTTP Port (80) on the host VM to th
   ip address
   ```
 2. access RabbitMQ from web browser
-open your favorate web browser and access: http://172.23.59.52/, (assuming 172.23.59.52 is the IP address of your multipass Ubuntu VM), you will see RabbitMQ Manaement web page.
+open your favorate web browser and access: http://<VM-IP>:8080/, you will see RabbitMQ Manaement web page.
