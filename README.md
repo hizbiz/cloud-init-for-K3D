@@ -21,15 +21,15 @@ That's it! The example command above will create a [Ubuntu](https://ubuntu.com/)
   - [HELM](https://helm.sh/) with bash auto-complete
   - [K3D](https://k3d.io/) with bash auto-complete
 
-### Recommended configuration
-shell into the newly created VM and add a couple of [HELM](https://helm.sh/) repositories
+### Add a couple of [HELM](https://helm.sh/) repositories
+shell into the newly created VM and add the following [HELM](https://helm.sh/) repositories
 ```bash
 multipass shell dev
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
 ```
-* Note that wWe have added [KEDA](https://keda.sh/)'s repository as well.*
+* Note that we have added [KEDA](https://keda.sh/)'s repository besides bitnami.*
 
 ## Play with the newly created environment.
 ### Create a K3D kubernetes develop/test cluster
