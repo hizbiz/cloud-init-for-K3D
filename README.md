@@ -52,7 +52,7 @@ helm install --set auth.username=rabbit --set auth.password=rabbit rabbit bitnam
 ```
 The above example command install RabbitMQ to its own namespace rabbit and set both username and password to rabbit.
 
-#### expose RabbitMQ
+#### Expose RabbitMQ
 ```bash
 kubectl port-forward --namespace rabbit svc/rabbit-rabbitmq 15672:15672 --address=0.0.0.0
 ```
