@@ -1,0 +1,49 @@
+##############################################################################
+# Example usage (with multipass):
+#   multipass launch -n dev -c 2 -d 80G -m 2G --cloud-init cloud-init.yaml -vvvv
+#
+##############################################################################
+
+write_files:
+- path: /home/ubuntu/.bashrc
+  append: true
+  defer: true
+  content: |
+      # aliases for kubernetes
+      alias k='kubectl'
+      alias h='helm'
+
+#################################################################
+runcmd:
+# general purpose packages
+- apt update && apt install -y ca-certificates curl gnupg lsb-release software-properties-common
+
+# Source control, editor
+- apt install -y git fossil vim
+
+# Docker and Docker Compose
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+- echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+- apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+- usermod -aG docker ubuntu
+
+# kubectl
+- curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+- echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+- apt update && apt install -y kubectl
+- kubectl completion bash | tee /etc/bash_completion.d/kubectl
+
+# HELM
+- curl https://baltocdn.com/helm/signing.asc | gpg --dearmor -o /usr/share/keyrings/helm.gpg
+- echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+- apt update && apt install -y helm
+- helm completion bash | tee /etc/bash_completion.d/helm
+
+# K3D
+- curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+- k3d completion bash | tee /etc/bash_completion.d/k3d
+ 
+#################################################################
+# Packages
+package_update: true
+package_upgrade: true
