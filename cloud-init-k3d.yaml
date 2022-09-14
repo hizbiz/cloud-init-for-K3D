@@ -1,6 +1,6 @@
 ##############################################################################
 # Example usage (with multipass):
-#   multipass launch -n dev -c 2 -d 80G -m 2G --cloud-init cloud-init.yaml -vvvv
+#   multipass launch -n dev -c 2 -m 2G -d 80G --cloud-init ./cloud-init-k3d.yaml -vvvv
 #
 ##############################################################################
 
