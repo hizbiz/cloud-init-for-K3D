@@ -1,42 +1,38 @@
-This repository contains a minimalist cloud-init file, with which a [Ubuntu](https://ubuntu.com/) 20.04+ based VM can be created in a couple of minutes with the following pre-installed/configured:
-  - [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) with bash auto-complete
-  - [HELM](https://helm.sh/) with bash auto-complete
-  - [K3D](https://k3d.io/) with bash auto-complete
+This repository contains a minimalist cloud-init file, with which a [Ubuntu](https://ubuntu.com/) 20.04+ based [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment can be created in a couple of minutes.
 
-## Create [K3D](https://k3d.io/) environment from scratch with [multipass](https://multipass.run/)
-In this section, we will demonstrate how to use [multipass](https://multipass.run/) and the cloud-init file in this repository to create a [K3D](https://k3d.io/) environment all automatically.
+## Create [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment with [multipass](https://multipass.run/)
+In this section, we will demonstrate how to use [multipass](https://multipass.run/) and the cloud-init file in this repository to create a [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment all automatically.
 
 *If however, you want to use an existing [Ubuntu](https://ubuntu.com/) environment, refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully) on how to do it manually.*
 
 1. Install [multipass](https://multipass.run/) (if you don't have it already) following [the instruction from its official website](https://multipass.run/install).
 2. Open a terminal, clone this repository and move into it.
-3. Create K3D kubernetes environment with multipass
+3. Create [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment with [multipass](https://multipass.run/)
 ```bash
 multipass launch -n dev -c 2 -m 2G -d 40G --cloud-init ./cloud-init-k3d.yaml -vvvv
 ```
-That's it! The example command above will create a Ubuntu 20.04+ VM named *dev* with 2 CPU, 2G RAM, 40G HDD and the following:
+That's it! The example command above will create a [Ubuntu](https://ubuntu.com/) 20.04+ VM named *dev* with 2 CPU, 2G RAM, 40G HDD and the following pre-installed/configured:
   - [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) with bash auto-complete
   - [HELM](https://helm.sh/) with bash auto-complete
   - [K3D](https://k3d.io/) with bash auto-complete
 
 ### Recommended configuration
-shell into the newly created VM and add a couple of helm repositories
+shell into the newly created VM and add a couple of [HELM](https://helm.sh/) repositories
 ```bash
 multipass shell dev
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
 ```
-* We have added [KEDA](https://keda.sh/)'s repository.
+* Note that wWe have added [KEDA](https://keda.sh/)'s repository as well.*
 
 ## Play with the newly created environment.
-Refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully#6-verify-the-environment) on how to verify the newly created VM.
-
 ### Create a K3D kubernetes develop/test cluster
 1. shell into the newly created VM if you haven't yet
 ```bash
 multipass shell dev
 ```
+
 2. create cluster
 ```bash
 k3d cluster create test -p 0.0.0.0:8080:80@loadbalancer
