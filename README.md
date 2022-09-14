@@ -5,6 +5,7 @@ In this section, we will demonstrate how to use [multipass](https://multipass.ru
 
 *If however, you want to use an existing [Ubuntu](https://ubuntu.com/) environment, refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully) on how to do it manually.*
 
+### Steps to create the environment
 1. Install [multipass](https://multipass.run/) (if you don't have it already) following [the instruction from its official website](https://multipass.run/install).
 2. Open a terminal, clone this repository and move into it.
 3. Create [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment with [multipass](https://multipass.run/)
