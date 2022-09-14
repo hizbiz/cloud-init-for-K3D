@@ -69,3 +69,11 @@ The above command will direct any traffic to HTTP Port (15672) on the host VM to
   ```
 2. access RabbitMQ from web browser
 open your favorate web browser and access: http://<VM-IP>:15672/, you will see RabbitMQ Manaement web page.
+  
+### Cleanup
+Now it's time to cleanup the test cluster we have created:
+```bash
+k3d cluster delete test
+```
+
+That's it. I guess we have verified we have got a working [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment.
