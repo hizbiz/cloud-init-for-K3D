@@ -8,6 +8,10 @@ In this section, we will demonstrate how to use [multipass](https://multipass.ru
 ### Steps to create the environment
 1. Install [multipass](https://multipass.run/) (if you don't have it already) following [the instruction from its official website](https://multipass.run/install).
 2. Open a terminal, clone this repository and move into it.
+```bash
+git clone https://github.com/hizbiz/cloud-init-for-K3D.git
+cd cloud-init-for-K3D
+```
 3. Create [K3D](https://k3d.io/) [kubernetes](https://kubernetes.io/) environment with [multipass](https://multipass.run/)
 ```bash
 multipass launch -n dev -c 2 -m 2G -d 40G --cloud-init ./cloud-init-k3d.yaml -vvvv
