@@ -1,42 +1,35 @@
-This repository contains a sample Python application implemented to consume messages from a RabbitMQ queue.
-Using this sample application, I will demonstrate:
+This repository contains a minimalist cloud-init file, with which a [Ubuntu](https://ubuntu.com/) 20.04+ based VM can be created in a couple of minutes with the following pre-installed/configured:
+  - [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) with bash auto-complete
+  - [HELM](https://helm.sh/) with bash auto-complete
+  - [K3D](https://k3d.io/) with bash auto-complete
 
-+ Setup K3D kubernetes cluster environment
-+ Create a test K3D kubernetes cluster
-+ Install KEDA and RabbitMQ to the newly created test cluster
-+ Expose RabbitMQ in the test cluster to the host machine
-+ Deploy the sample application as KEDA ScaledJob with or without Helm Chart
-+ Post job message from Web Browser on host machine or with kubernetes Job from within the cluster
-+ Verify the deployed sample application (KEDA ScaledJob) is activated by KEDA and actually consumes the posted message
+## Create [K3D](https://k3d.io/) environment from scratch with [multipass](https://multipass.run/)
+In this section, we will demonstrate how to use [multipass](https://multipass.run/) and the cloud-init file in this repository to create a [K3D](https://k3d.io/) environment all automatically.
 
-## Create K3D kubernetes develop/test environment
-I will show two ways to create a K3D kubernetes environment on Ubuntu 20.04+: manual and automatic.
+*If however, you want to use an existing [Ubuntu](https://ubuntu.com/) environment, refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully) on how to do it manually.*
 
-The recommended way is to use multipass, with which a standard K3D kubernetes environment (together with a brand new Ubuntu 20.04+ VM) can be created in a couple of minutes. See the instruction below:
-
-*If however, you want to use an existing Ubuntu environment, refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully) on how to do it manually.*
-
-### Create K3D kubernetes develop/test enviornment automatically with multipass:
-1. Install (if you don't have it already) [multipass](https://multipass.run/) following [the instruction from its official website](https://multipass.run/install).
+1. Install [multipass](https://multipass.run/) (if you don't have it already) following [the instruction from its official website](https://multipass.run/install).
 2. Open a terminal, clone this repository and move into it.
 3. Create K3D kubernetes environment with multipass
 ```bash
-multipass launch -n dev -c 2 -m 2G -d 40G --cloud-init <path-to-cloud-init-k3d.yaml> -vvvv
+multipass launch -n dev -c 2 -m 2G -d 40G --cloud-init ./cloud-init-k3d.yaml -vvvv
 ```
-  The example command above will create a Ubuntu 20.04+ VM named *dev* with the following packages pre-installed:
-  - kubectl with bash auto-complete
-  - helm with bash auto-complete
-  - k3d with bash auto-complete
+That's it! The example command above will create a Ubuntu 20.04+ VM named *dev* with 2 CPU, 2G RAM, 40G HDD and the following:
+  - [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) with bash auto-complete
+  - [HELM](https://helm.sh/) with bash auto-complete
+  - [K3D](https://k3d.io/) with bash auto-complete
 
-4. shell into the newly created VM and add helm repositories for KEDA and RabbitMQ
+### Recommended configuration
+shell into the newly created VM and add a couple of helm repositories
 ```bash
 multipass shell dev
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
 ```
+* We have added [KEDA](https://keda.sh/)'s repository.
 
-5. play with the newly created environment.
+## play with the newly created environment.
 Refer to [this page](https://github.com/hizbiz/k3d-keda-rabbitmq-pika-example/wiki/Setup-K3D-kubernetes-develop-environment-manully#6-verify-the-environment) on how to verify the newly created VM.
 
 ### Create a K3D kubernetes develop/test cluster
