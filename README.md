@@ -35,9 +35,9 @@ multipass shell dev
 
 2. create cluster
 ```bash
-k3d cluster create test -p 0.0.0.0:8080:80@loadbalancer
+k3d cluster create test
 ```
-The above example command will create a cluster named test and map VM dev's port 8080 to the cluster test's ingress load balancer.
+The above example command will create a cluster named *test* and points your [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) to the newly created cluster, *test*
 
 ### Install KEDA to its own namespace keda
 ```bash
@@ -52,17 +52,11 @@ helm install --set auth.username=rabbit --set auth.password=rabbit rabbit bitnam
 ```
 The above example command install RabbitMQ to its own namespace rabbit and set both username and password to rabbit.
 
-#### Create a secret for the RabbitMQ URL
-```bash
-kubectl apply -f rabbit-secret.yaml
-```
-The above command create a secret named rabbit-secret with a key rabbit-url for accessing the installed RabbitMQ. Refer to the rabbit-secret.yaml for details.
-
 #### expose RabbitMQ
 ```bash
-kubectl apply -f expose-rabbit.yaml
+kubectl port-forward --namespace rabbit svc/rabbit-rabbitmq 15672:15672 --address=0.0.0.0
 ```
-The above command will direct any traffic to HTTP Port (80) on the host VM to the RabbitMQ Management Service running inside the cluster. For example, you can access RabbitMQ in the cluster from the host machine where you run multipass to create the Ubuntu VM.
+The above command will direct any traffic to HTTP Port (15672) on the host VM to the RabbitMQ Management Service running inside the cluster. For example, you can access RabbitMQ in the cluster from the host machine where you run multipass to create the Ubuntu VM.
 
 1. identify multipass Ubuntu VM's IP address
   - From host machine where you install multipass
@@ -74,4 +68,4 @@ The above command will direct any traffic to HTTP Port (80) on the host VM to th
   ip address
   ```
 2. access RabbitMQ from web browser
-open your favorate web browser and access: http://<VM-IP>:8080/, you will see RabbitMQ Manaement web page.
+open your favorate web browser and access: http://<VM-IP>:15672/, you will see RabbitMQ Manaement web page.
