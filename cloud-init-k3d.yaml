@@ -42,7 +42,11 @@ runcmd:
 # K3D
 - curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 - k3d completion bash | tee /etc/bash_completion.d/k3d
- 
+
+# telepresence
+- curl -fL https://app.getambassador.io/download/tel2/linux/amd64/latest/telepresence -o /usr/local/bin/telepresence
+- chmod a+x /usr/local/bin/telepresence
+
 #################################################################
 # Packages
 package_update: true
